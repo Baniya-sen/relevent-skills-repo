@@ -23,7 +23,7 @@ public class CaesarEncryption {
             System.out.println("Usage: java \"class_name\" \"key\"");
             System.exit(1);
         } else {
-//            If command lne argument is indeed a number for key
+//            If command line argument is indeed a number for "key"
             String argument1 = args[0];
             if (!argument1.matches("\\d+")) {
                 System.out.println("The provided key contains non-digit characters.");
@@ -40,7 +40,7 @@ public class CaesarEncryption {
         String cipherText = "";
 //         Printing Ciphertext character by character
         for (int i = 0; i < plainText.length(); i++) {
-            char rotatedChar = rotate(plainText.charAt(i),key);
+            char rotatedChar = rotate(plainText.charAt(i), key);
             cipherText += rotatedChar;
         }
 
@@ -59,8 +59,7 @@ public class CaesarEncryption {
 //            If char is alphabet and present at ith index of Alpha
             if (verifyCiphertext == ALPHA[i]) {
                 if (isUpperCase(ciphertext)) {
-/*                    If key is >= 26 ith + key % 26(alphabetLength) will make sure
-                      that after 26th character, ith will go back to 0                             */
+//                    If key is >= 26, ith + key % 26(alphabetLength) will make sure that after 26th character, ith will go back to 0
                     cipherT = ALPHA[(i + key) % alphabetLength];
                     break;
                 } else if (isLowerCase(ciphertext)) {
