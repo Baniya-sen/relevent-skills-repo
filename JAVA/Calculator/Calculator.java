@@ -26,9 +26,9 @@ public class Calculator implements ActionListener, KeyListener {
     Font functionButtonFont = new Font("Arial", Font.BOLD, 14);
     Font highlightTextLabelFont = new Font("Arial", Font.ITALIC, 15);
 
-    ImageIcon menuIcon = new ImageIcon("src /menu.png");
-    ImageIcon windowIcon = new ImageIcon("src/calculator.png");
-    ImageIcon standardIcon = new ImageIcon("src/standard.png");
+    ImageIcon menuIcon = new ImageIcon("Calculator/menu.png");
+    ImageIcon windowIcon = new ImageIcon("Calculator/calculator.png");
+    ImageIcon standardIcon = new ImageIcon("Calculator/standard.png");
 
     JButton[] numberButtons = new JButton[10];
     JButton[] functionButtons = new JButton[10];
