@@ -76,10 +76,6 @@ public class ATM_UI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ATM_UI("Data"));
-    }
-
     public JLabel createBackgroundImage() {
         JLabel backgroundLabel = new JLabel();
         backgroundLabel.setBounds(0, -50, 1000, 800);
