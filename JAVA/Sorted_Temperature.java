@@ -1,3 +1,5 @@
+// Using Linear Search Algorithm
+
 public class Sorted_Temperature {
     
     String city;
