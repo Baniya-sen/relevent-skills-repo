@@ -27,8 +27,10 @@ public class JPEGRecover_Algorithm {
                         outfile.close();
                     String names = String.format("%03d.jpg", count);
                     outfile = new FileOutputStream(names);
-                    if (outfile == null)
+                    if (outfile == null) {
                         System.out.println("Could not write to .jpg file");
+                        System.exit(2);
+                    }
                     count++;
                 }
 
