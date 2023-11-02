@@ -10,7 +10,7 @@
 #define BITS_IN_BYTE 8
 
 int convert(int string_ascii_value[], int string_length);
-print_emoji(int bit);
+void print_emoji(int bit);
 
 int main(void)
 {
@@ -88,7 +88,7 @@ int convert(int string_ascii_value[], int string_length)
 	return ((string_length * BITS_IN_BYTE) == count) ? 0 : 1;
 }
 
-print_emoji(int bit)
+void print_emoji(int bit)
 {
 	if (bit == 0)
 	{
