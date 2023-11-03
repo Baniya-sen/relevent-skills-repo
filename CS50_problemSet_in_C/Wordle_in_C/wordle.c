@@ -9,8 +9,10 @@
 #include <time.h>
 #include <stdbool.h>
 
+#define MAX_WORD_LENGTH 9
 #define LISTSIZE 1000
 
+// Defining exact scores for position and matching words
 #define EXACT 2
 #define CLOSE 1
 #define WRONG 0
@@ -33,38 +35,55 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	// Get wordsize
 	int temp_wordsize = atoi(argv[1]);
 	if (temp_wordsize < 5 || temp_wordsize > 8)
 	{
-		printf("Key must be 5, 6, 7, or 8\n");
+		printf("Wordsize must be 5, 6, 7, or 8\n");
 		return 2;
 	}
 
 	int wordsize = temp_wordsize;
 
-	char filename[6];
-	sprintf(filename, "%d.txt", wordsize);
-	FILE* infile = fopen(filename, "r");
+	FILE* infile = fopen("words.txt", "r");
 	if (infile == NULL)
 	{
 		printf("Can't open file\n");
 		return 3;
 	}
 
-	char *options = (char *)malloc(LISTSIZE * (wordsize * 1) * sizeof(*options));
-	if (options == NULL)
+	// Array to hold all words from file
+	char options[LISTSIZE][MAX_WORD_LENGTH];
+	char current_word[MAX_WORD_LENGTH];
+	int word_count = 0;
+
+	// Check if word readed from file is of size user input
+	while (fscanf(infile, "%s", current_word) == 1)
 	{
-		printf("Memory allocation failed\n");
+		if (strlen(current_word) == wordsize)
+		{
+			strcpy(options[word_count], current_word);
+			word_count++;
+		}
+		if (word_count >= LISTSIZE)
+		{
+			break;
+		}
+	}
+
+	// If no words read, exit
+	if (word_count == 0)
+	{
+		printf("There is no word in txt file regarding %i length!\n", wordsize);
 		return 4;
 	}
 
-	for (int i = 0; i < LISTSIZE; i++)
-	{
-		fscanf(infile, "%s", options + i * (wordsize + 1));
-	}
-
+	// Seeding random word
 	srand(time(NULL));
-	char* choise = options + (rand() % LISTSIZE) * (wordsize + 1);
+
+	// Selecting random word
+	int random_index = rand() % word_count;
+	char* choise = options[random_index];
 	int guesses = wordsize + 1;
 	bool won = false;
 
@@ -74,18 +93,31 @@ int main(int argc, char* argv[])
 
 	for (int i = 0; i < wordsize; i++)
 	{
+		// Get users guess
 		char* guess = get_guess(wordsize);
 		printf("Guess %i: ", i + 1);
 
+		// Array to hold guess word status of Green, Yellow, Red
 		int *status = malloc(sizeof(int) * wordsize);
+		if (status == NULL)
+		{
+			printf("Memory allocation failed\n");
+			return 5;
+		}
+
+		// Initialing array to 0, to wrong initial
 		for (int i = 0; i < wordsize; i++)
 		{
 			status[i] = 0;
 		}
 
+		// Get users score of current guess
 		int score = get_score(guess, wordsize, choise, status);
 		print_guess(guess, status);
 
+		free(status);
+
+		// If user guessed it right
 		if (score == EXACT * wordsize)
 		{
 			won = true;
@@ -108,11 +140,14 @@ int main(int argc, char* argv[])
 char* get_guess(int wordsize)
 {
 	static char guess[9] = "";
+
+	// If guess contains previous value because of static, reset it
 	if (strlen(guess) != 0)
 	{
 		memset(guess, 0, sizeof(guess));
 	}
 
+	// Take user guess until desired wordsize
 	while (strlen(guess) != wordsize)
 	{
 		bool isValid = true;
@@ -124,6 +159,7 @@ char* get_guess(int wordsize)
 		int n = strlen(temp_guess);
 		for (int i = 0; i < n; i++)
 		{
+			// Check if all letters are alphabet, if not, take another guess
 			if (!isalpha(temp_guess[i]))
 			{
 				isValid = false;
@@ -142,6 +178,7 @@ char* get_guess(int wordsize)
 int get_score(char* guess, int wordsize, char* choise, int* status)
 {
 	int score = 0;
+	// Boolean array to check if current letter has been matched in current cycle
 	bool is_matched[8] = { false };
 
 	for (int i = 0; i < wordsize; i++)
@@ -150,6 +187,7 @@ int get_score(char* guess, int wordsize, char* choise, int* status)
 		for (int j = 0; j < wordsize; j++)
 		{
 			int g = tolower(guess[j]);
+			// Match ascii value because of same letter in different index
 			if (c == g && !is_matched[j])
 			{
 				score += i == j ? EXACT : CLOSE;
@@ -165,8 +203,10 @@ int get_score(char* guess, int wordsize, char* choise, int* status)
 
 void print_guess(char* guess, int* status)
 {
+	// Loop through each char in guess
 	while (*guess)
 	{
+		// Status represent score, so color match with score
 		if (*status == EXACT)
 		{
 			printf(GREEN "%c" RESET, *guess);
