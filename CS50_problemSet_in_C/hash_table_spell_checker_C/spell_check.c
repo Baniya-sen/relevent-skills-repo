@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 	while (fread(&c, sizeof(char), 1, t_file))
 	{
 		// If char is alpha or apostrophe
-		if (isalpha(c) || c == '\'' && index > 0)
+		if (isalpha(c) || (c == '\'' && index > 0))
 		{
 			// Add letter to word
 			word[index] = c;
@@ -98,10 +98,13 @@ int main(int argc, char* argv[])
 			index = 0;
 		}
 
-		// Must have finished reading a word
-		else
+		//If char is niether alphabet nor alphanumeric, then must have finished reading a word
+		else if (index > 0)
 		{
+			// Terminate current word
 			word[index] = '\0';
+
+			// Increate word counter
 			words++;
 
 			// Check word's spelling
