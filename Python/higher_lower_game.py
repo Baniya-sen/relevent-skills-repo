@@ -21,6 +21,7 @@ def main():
 
         choice = input("Who has more followers? Type 'A' or 'B': ").lower()
         clear()
+        print(logo)
 
         # If user is right, continue game with score += 1
         if check_followers(choice, random_data_A['follower_count'], random_data_B['follower_count']):
