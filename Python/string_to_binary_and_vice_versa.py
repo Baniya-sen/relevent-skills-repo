@@ -61,7 +61,7 @@ def print_converted(converted_result_list):
     """Prints the converted result"""
     print("Output: ")
     for item in converted_result_list:
-        print(item, end="")
+        print(item, end=" ")  # Remove space from 'end=" "' to print without space
 
 
 if __name__ == "__main__":
