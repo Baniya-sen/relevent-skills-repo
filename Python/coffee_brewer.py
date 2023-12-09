@@ -22,18 +22,17 @@ def main():
         elif user_prompt == 'report':
             # Reports resources left in machine
             (lambda: print('\n'.join([f"[{m_item}: {price}]" for m_item, price in resources.items()])))()
-            print(f"[money: {money}]", end='\n\n')
+            print(f"[money: ${money}]", end='\n\n')
         else:
             print("Wrong choice.. Try again!", end='\n\n')
 
 
 def check_resource(menu_choice):
     """Returns True if resources required for a order are sufficient, else False"""
-    required_resources = [value for value in MENU[menu_choice]["ingredients"].values()]
-    resources_left = [value for value in resources.values()]
-    if not resources_left >= required_resources:
-        print("Not enough raw ingredients left in machine, you peasant!")
-        return False
+    for item in MENU[menu_choice]["ingredients"]:
+        if MENU[menu_choice]["ingredients"][item] > resources[item]:
+            print(f"Not enough {item} left in machine, you peasant!")
+            return False
     return True
 
 
@@ -58,16 +57,15 @@ def transactions(amount, choice):
     """Calculates change, if any, reduce ingredients count from resources, adds money to global variable"""
     cost = MENU[choice]["cost"]
     if amount < cost:
-        print("Provide sufficient funds! You truly are peasant :(")
+        print("Provide sufficient funds! You truly are peasant. Money refunded :(")
         return False
     elif amount > cost:
-        change = amount - cost
-        print(f"\nHere is your change, sir! {change:.2f}")
+        change = round(amount - cost, 2)
+        print(f"\nHere is your change, sir! ${change:.2f}")
 
     # If ingredients used by order in resources, then reduce them by order ingredients count
     for key in MENU[choice]["ingredients"]:
-        if key in resources.keys():
-            resources[key] -= MENU[choice]["ingredients"][key]
+        resources[key] -= MENU[choice]["ingredients"][key]
     global money
     money += cost
 
