@@ -1,4 +1,4 @@
--- Keep a log of any SQL queries you execute as you solve the mystery. Fiftyville keeps records on SQL tables.
+-- Keeping a log of any SQL queries to solve the mystery. Fiftyville keeps records on SQL tables.
 -- CS50 duck stolen. Duck may had something valuable inside. Gold? Diamonds? Maybe. That's why it is necessary to find theif.
 -- Information so far, Theft took place aroung 10:15 AM on 28 july 2021. Emma's bakerey is spot.
 
