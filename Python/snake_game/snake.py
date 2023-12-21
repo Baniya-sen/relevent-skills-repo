@@ -52,18 +52,22 @@ class Snakes:
         """Moves snake upward"""
         if self.snake_head.heading() != DOWN:
             self.snake_head.setheading(UP)
+            self.move()
 
     def down(self):
         """Moves snake downward"""
         if self.snake_head.heading() != UP:
             self.snake_head.setheading(DOWN)
+            self.move()
 
     def left(self):
         """Moves snake left-side"""
         if self.snake_head.heading() != RIGHT:
             self.snake_head.setheading(LEFT)
+            self.move()
 
     def right(self):
         """Moves snake right-side"""
         if self.snake_head.heading() != LEFT:
             self.snake_head.setheading(RIGHT)
+            self.move()

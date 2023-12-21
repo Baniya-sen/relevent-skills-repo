@@ -36,7 +36,7 @@ def main():
 
         # Detect snake collision with its tail
         for snake_block in snake.all_turtles[1:]:
-            if snake.snake_head.distance(snake_block) < 2:
+            if snake.snake_head.distance(snake_block) < 5:
                 screen.update()
                 score.game_over()
                 is_gameOn = False
