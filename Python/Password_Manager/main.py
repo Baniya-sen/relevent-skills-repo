@@ -1,3 +1,4 @@
+import random
 from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
@@ -49,7 +50,7 @@ def verify_beforehand():
     """Prompt user to verify details before storing to file-system"""
     website_data = website_input.get().lower()
     email_data = email_input.get()
-    password_data = password_input.get()
+    password_data = cipher_data(password_input.get(), "encrypt")  # Encrypt password before storing
 
     # If any field is empty, give error
     if len(website_data) == 0 or len(email_data) == 0 or len(password_data) == 0:
@@ -116,6 +117,7 @@ def search_data():
             if website_query in password_data:
                 email_from_file = password_data[website_query]["Email/Username"]
                 password_from_file = password_data[website_query]["Password"]
+                password_from_file = cipher_data(password_from_file, "decrypt")
                 copy(password_from_file)
                 messagebox.showinfo(title="Password data",
                                     message=f"Email: {email_from_file}\nPassword: {password_from_file}\n"
@@ -123,6 +125,25 @@ def search_data():
             else:
                 messagebox.showerror(title="No data found!",
                                      message=f'There is no such website "{website_query}" found in data.')
+
+
+# ---------------------------- PASSWORD ENCRYPTOR ------------------------------- #
+def cipher_data(plaintext, method):
+    """Performs encryption or decryption on password with define method"""
+    cipher_text = ""
+    # A string with all alphabetic letters, digits and punctuations
+    all_letters = ascii_letters + digits + punctuation
+    # A key to shift letters through
+    key = -int(plaintext[-1]) if method == "decrypt" else int(choice(digits))
+
+    for char in plaintext:
+        cipher_text += all_letters[(all_letters.index(char) + key) % len(all_letters)]
+
+    # If encryption, add decrypt key to end of password
+    if method == "encrypt":
+        return cipher_text + str(key)
+    else:
+        return cipher_text[0:-1]
 
 
 # ---------------------------- UI SETUP ------------------------------- #
