@@ -1,16 +1,18 @@
 from question_model import Questions
 from data import question_data
 from quiz_brain import QuizzBrain
+from ui import QuizInterface
 
+# Creates a list of Questions class instance
 question_bank = []
 
+# Looping through raw questions data and passing to Questions class
 for question in question_data:
-    question_bank.append(Questions(text=question["text"], answer=question["answer"]))
+    question_bank.append(Questions(
+        text=question["question"],
+        answer=question["correct_answer"])
+    )
 
+# Instances / Main loop
 quizz = QuizzBrain(questions_list=question_bank)
-
-while quizz.still_has_questions():
-    quizz.next_question()
-
-print("You have completed the quizz.")
-print(f"And Your final score is {quizz.score}/{quizz.question_number}.")
+ui = QuizInterface(quizz)
