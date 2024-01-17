@@ -48,10 +48,19 @@ body {
     width: 60px;
     height: 60px;
     cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.search button:hover {
+    opacity: 0.8;
 }
 
 .search button img {
-    height: 24px;
+    margin-top: 5px;
+    height: 25px;
+    transition: transform 0.2s ease;
+}
+.search button img:hover {
+    transform: scale(0.9);
 }
 
 .weather h1 {

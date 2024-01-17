@@ -28,8 +28,15 @@ async function getWeather (city) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    let searchBtn = document.querySelector(".search button")
+    searchBtn.style.transition = "transform 0.2s ease-in-out";
 
-    document.querySelector(".search button").addEventListener('click', ()=> {
+    searchBtn.addEventListener('mousedown', () => {
+        searchBtn.style.transform = "scale(0.8)";
+    });
+
+    searchBtn.addEventListener('mouseup', ()=> {
+        searchBtn.style.transform = "scale(1)";
         let cityName = document.querySelector(".search input").value;
 
         if (cityName) {
