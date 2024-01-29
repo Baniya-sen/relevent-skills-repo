@@ -1,8 +1,6 @@
-import json.decoder
 import os
-from pprint import pprint
-
 import requests
+import json.decoder
 
 
 class FlightSearch:
