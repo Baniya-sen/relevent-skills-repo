@@ -1,0 +1,183 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 2.5% 3.5% 3.5% 2.5%;
+}
+
+body h1 {
+    font-family: "Protest Riot", sans-serif;
+    font-size: 3rem;
+    margin-bottom: 2%;
+    color: orange;
+}
+
+.description {
+    font-family: "Poppins", sans-serif;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.player-button {
+    font-family: "Nunito", sans-serif;
+    font-size: 24px;
+    padding: 15px 30px;
+    margin: 10px;
+    margin-top: 2%;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.player-button:hover {
+    background-color: #45a049;
+}
+
+#board-container {
+    text-align: center;
+    margin: 0 auto;
+    width: 500px;
+}
+
+.board {
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 500px;
+}
+
+.square {
+    width: 125px; /* Adjust width of squares */
+    height: 125px; /* Adjust height of squares */
+    margin: 5px; /* Adjust margin between squares */
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-size: 3em; /* Adjust font size for X and O */
+    text-align: center; /* Center X or O horizontally */
+    cursor: pointer;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: flex;
+    justify-content: center;
+    align-items: center;/* Include padding and border in the element's total width and height */
+}
+
+.square:hover {
+    background-color: #333; /* Change color on hover */
+}
+
+.player-X {
+    font-family: "Sixtyfour", sans-serif;
+    color: green; /* Color for X */
+}
+
+.player-O {
+    font-family: "Sixtyfour", sans-serif;
+    color: red; /* Color for O */
+}
+
+#play-again {
+    display: none;
+}
+
+#play-again button {
+    font-size: 24px;
+    padding: 15px 30px;
+    margin: 10px;
+    margin-top: 4%;
+    border: none;
+    border-radius: 10px;
+    background-color: #d34d83; /* Green */
+    color: white;
+    cursor: pointer;
+}
+
+.game-over .square {
+    cursor: not-allowed;
+    background-color: black;
+}
+
+/* For mobile screens */
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 2.5% 0;
+    }
+
+    .description {
+        width: 80%;
+        margin: 5% auto 18%;
+    }
+
+    .player-button {
+        font-size: 21px;
+        padding: 10px 20px;
+    }
+
+    #board-container {
+        margin-top: -12%;
+        width: 90%;
+    }
+
+    .board {
+        width: 100%;
+    }
+
+    .square {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center; /* Add this line */
+        line-height: 125px; /* Add this line */
+        width: 30%;
+        font-size: 2.6em;
+    }
+    .square .player-X, .square .player-O {
+        line-height: initial; /* Reset line-height for X and O */
+    }
+
+    #play-again button {
+        margin: 30px;
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+}
+
+/* For laptop screens and larger */
+@media only screen and (min-width: 601px) {
+    body {
+        padding: 2.5% 3.5% 3.5% 3.5%;
+    }
+
+    .description {
+        width: 50%;
+    }
+
+    .player-button {
+        font-size: 24px;
+        padding: 15px 30px;
+    }
+
+    #board-container {
+        width: 500px;
+    }
+
+    .board {
+        width: 500px;
+    }
+
+    .square {
+        width: 125px;
+        height: 125px;
+        font-size: 3em;
+    }
+
+    #play-again button {
+        font-size: 24px;
+        padding: 15px 30px;
+    }
+}
